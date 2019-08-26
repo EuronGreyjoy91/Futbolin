@@ -1,0 +1,31 @@
+<div class = "animated fadeInRightBig panel"
+    [ngClass]="index % 4 == 0 ? 'fourth-delay' : index % 3 == 0 ? 'third-delay' : index % 2 == 0 ? 'second-delay' : 'first-delay'">
+
+    <div class = "panel-head" >
+        <div class = "img-head" [ngStyle]="{'background-image': 'url(assets/img/no-user.png)'}">
+        </div>
+    </div>
+
+    <div class = "panel-data">
+
+        <div class = "panel-text text-center">
+            <h3>{{ jugador.nombre }}</h3>
+            <i>"Tiro venenoso"</i>
+            <hr>
+            <p><b>Ganados:</b> {{ jugador.ganados }}</p>
+            <p><b>Perdidos:</b> {{ jugador.perdidos }}</p>
+        </div>
+
+        <div class = "panel-estadisticas">
+            <button type = "button" class = "btn btn-primary btn-block btn-estadisticas">
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                Estadisticas
+            </button>
+            <button type = "button" class = "btn btn-success btn-block btn-seleccionar">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Seleccionar
+            </button>
+        </div>
+    </div>
+
+</div>

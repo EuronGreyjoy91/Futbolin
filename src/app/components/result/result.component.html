@@ -1,0 +1,29 @@
+<div class = "container">
+    <div class = "row">
+        <div class = "col">
+            <h1 class = "text-center">Futbolin <small>v1.0.0</small></h1>
+            <h2 class = "text-center">Comienza el partido!</h2>
+            <a class = "btn btn-danger" [routerLink] = "['/home']"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+        </div>
+    </div>
+</div>
+
+<div class = "row" id = "row-result">
+    <img src = "assets/img/versus.png" id = "img-versus" class = "animated fadeInUp slow"/>
+    <div class = "blue-half col-md-6 animated fadeInLeftBig">
+    </div>
+    <div class = "red-half col-md-6 animated fadeInRightBig">
+    </div>
+</div>
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col">
+            <h3>Tiempo: {{ tiempo }} segundos</h3>
+            <h3>Ganador: </h3>
+            <button type = "button" class = "btn btn-primary">Equipo azul</button>
+            <button type = "button" class = "btn btn-danger">Equipo rojo</button>
+            <button type = "button" class = "btn btn-success">Confirmar</button>
+        </div>
+    </div>
+</div>

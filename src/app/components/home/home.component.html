@@ -1,0 +1,23 @@
+<div class = "container">
+    <div class = "row">
+        <div class = "col">
+            <h1 class = "text-center">Futbolin <small>v1.0.0</small></h1>
+        </div>
+    </div>
+</div>
+<hr>
+<div class = "container mb-3">
+    <div class = "row">
+        <div class = "col">
+            <h2 class = "text-center mb-3">Jugadores</h2>
+            <button type = "button" class = "btn btn-primary" [routerLink] = "['/jugador']"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Nuevo jugador</button>
+            <button type = "button" class = "btn btn-primary"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp;Estadisticas</button>
+            <a class = "btn btn-danger" [routerLink] = "['/result']"><i class="fa fa-wheelchair-alt" aria-hidden="true"></i>&nbsp;Resultado</a>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col-10 offset-1 offset-sm-0 col-sm-3" *ngFor="let jugador of jugadores; let i = index">
+            <app-jugador [jugador] = "jugador" [index] = "(i + 1)"></app-jugador>
+        </div>
+    </div>
+</div>

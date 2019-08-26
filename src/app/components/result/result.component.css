@@ -1,0 +1,23 @@
+#img-versus{
+    position: absolute;
+    height: 100px;
+    z-index: 1;
+    top: 35%;
+    left: 47%;
+}
+
+#row-result{
+    position:relative;
+}
+
+.blue-half, .red-half{
+    height: 300px;
+}
+
+.blue-half{
+    background-color: blue;
+}
+
+.red-half{
+    background-color: red;
+}
