@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -25,6 +25,7 @@ import { JugadorFormComponent } from './components/jugador-form/jugador-form.com
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientJsonpModule,
     APP_ROUTING
   ],
   providers: [],

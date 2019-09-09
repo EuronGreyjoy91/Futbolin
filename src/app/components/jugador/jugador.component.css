@@ -31,6 +31,12 @@
     bottom: 0px;
 }
 
+.btn-editar{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
 .btn-estadisticas, .btn-seleccionar{
     border-radius: 0;
 }

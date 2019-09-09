@@ -2,6 +2,9 @@
     [ngClass]="index % 4 == 0 ? 'fourth-delay' : index % 3 == 0 ? 'third-delay' : index % 2 == 0 ? 'second-delay' : 'first-delay'">
 
     <div class = "panel-head" >
+        <a href = "#" [routerLink] = "['/jugador', jugador.id]" class = "btn btn-primary btn-editar rounded-circle">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
         <div class = "img-head" [ngStyle]="{'background-image': 'url(assets/img/no-user.png)'}">
         </div>
     </div>
@@ -10,7 +13,7 @@
 
         <div class = "panel-text text-center">
             <h3>{{ jugador.nombre }}</h3>
-            <i>"Tiro venenoso"</i>
+            <i>"{{ jugador.habilidadEspecial }}"</i>
             <hr>
             <p><b>Ganados:</b> {{ jugador.ganados }}</p>
             <p><b>Perdidos:</b> {{ jugador.perdidos }}</p>

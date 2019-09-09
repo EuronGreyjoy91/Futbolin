@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
+import { Jugador } from '../models/jugador.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -8,15 +9,23 @@ import { map } from 'rxjs/operators';
 
 export class JugadorService {
 
-  constructor(private httpClient:HttpClient) { }
+  private _urlService:string = "http://localhost:8080/jugadores";
+
+  constructor(private httpClient:HttpClient, private jsonp: HttpClientJsonpModule) { }
 
   public obtenerJugadores(){
-      return this.httpClient.get("assets/data.txt", {responseType: 'text'})
-          .pipe(
-              map( (resp:any) => {
-                  return JSON.parse(resp).jugadores;
-              })
-          );
+      let url = `${this._urlService}/list`;
+      return this.httpClient.get<Jugador[]>(url);
+  }
+
+  public saveJugador(jugador:Jugador){
+      let url = `${this._urlService}/save`;
+      console.log(url);
+      return this.httpClient.post<Jugador>(url, jugador);
+  }
+
+  get urlService():string{
+      return this.urlService;
   }
 
 }

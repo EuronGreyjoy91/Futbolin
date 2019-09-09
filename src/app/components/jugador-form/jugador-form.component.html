@@ -1,48 +1,35 @@
 <div class = "container mt-5">
-    <div class = "row">
-        <h3>Nuevo jugador</h3>
-        <div class = "col">
-            <form [formGroup] = "formulario" (ngSubmit) = "guardarJugador()">
-                <div class="form-group row">
-                  <label class="col-2 col-form-label">Nombre</label>
-                  <div class="col-8">
-
-                    <input class="form-control"
-                           type="text"
-                           placeholder="Nombre"
-                           formControlName="nombre">
-                <!--
-                   <div *ngIf="forma.get('nombreCompleto.nombre').errors?.required" class = "form-control-feedback">
-                       El nombre es necesario.
-                   </div>
-
-                   <div *ngIf="forma.get('nombreCompleto.nombre').errors?.minlength" class = "form-control-feedback">
-                      Minimo 3 caracteres
-                   </div>
-                   -->
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-2 col-form-label">Habilidad especial</label>
-                    <div class="col-md-8">
-                        <input
-                            placeholder = "Habilidad especial"
-                            class = "form-control"
-                            formControlName="habilidadEspecial"
-                            type = "text" />
-                    </div>
-                </div>
-
-              <div class="form-group row">
-                <label class="col-2 col-form-label">&nbsp;</label>
-                <div class="input-group col-md-8">
-                  <button type="submit" class="btn btn-outline-primary">
-                    Guardar
-                  </button>
-                </div>
-              </div>
-            </form>
+    <h4>Nuevo jugador</h4>
+    <hr>
+    <form [formGroup] = "jugadorForm" (ngSubmit) = "guardarJugador()">
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Nombre</label>
+            <div class="col-md-8">
+                <input class="form-control"
+                type="text"
+                placeholder="Nombre"
+                formControlName="nombre">
+            </div>
         </div>
-    </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Habilidad especial</label>
+            <div class="col-md-8">
+                <input class="form-control"
+                type="text"
+                placeholder="Habilidad especial"
+                formControlName="habilidadEspecial">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="input-group col-md-8">
+                <button type="submit" class="btn btn-outline-primary">
+                    Guardar
+                </button>
+            </div>
+        </div>
+
+    </form>
 </div>

@@ -25,10 +25,7 @@ export class HomeComponent implements OnInit {
 
       this.jugadorService.obtenerJugadores()
         .subscribe(data => {
-            for(let i = 0; i < data.length; i++){
-                let jugador = new Jugador(data[i]);
-                this.addJugador(jugador);
-            }
+            this.jugadores = data;
         })
 
   }
