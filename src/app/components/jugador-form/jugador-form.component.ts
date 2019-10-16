@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JugadorService } from '../../services/jugador.service';
 import { Jugador } from '../../models/jugador.model';
 import Swal from 'sweetalert2';
@@ -13,63 +13,79 @@ import Swal from 'sweetalert2';
 export class JugadorFormComponent implements OnInit {
 
   private _jugadorForm:FormGroup;
+  private _jugador:Jugador;
+  private _fileImagen:File;
 
-  constructor(private jugadorService:JugadorService, private router:Router) { }
+  constructor(private jugadorService:JugadorService,
+            private activadtedRouter:ActivatedRoute,
+            private router:Router) {
+
+                this.jugador = new Jugador();
+
+  }
 
   ngOnInit() {
+      this.inicializarForm();
 
-      this._jugadorForm = new FormGroup({
-          'nombre': new FormControl("", [
-                                        Validators.required
-                                    ]),
-          'habilidadEspecial': new FormControl(""),
-      });
-
+      this.activadtedRouter.params.subscribe(params => {
+          if(params['id'] != undefined){
+              this.jugadorService.obtenerJugador(params['id'])
+                .subscribe(jugador => {
+                    this.jugador = jugador;
+                    this.inicializarForm();
+                })
+          }
+      })
   }
 
   guardarJugador(){
       if(this.jugadorForm.valid){
 
-          let object:any = {
-              id : null,
-              nombre : this.jugadorForm.controls.nombre.value,
-              habilidadEspecial : this.jugadorForm.controls.habilidadEspecial.value,
-              ganados: 0,
-              perdidos : 0,
-              goles: 0,
-              activo : true
+          if(this.fileImagen != undefined && this.fileImagen != null && this.fileImagen.size > 1000000){
+              Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: `La imagen no debe superar 1MB`
+              });
           }
+          else{
+              this.jugador.nombre = this.jugadorForm.controls.nombre.value;
+              this.jugador.habilidadEspecial = this.jugadorForm.controls.habilidadEspecial.value;
 
-          let jugador:Jugador = new Jugador(object);
-          console.log(jugador);
-
-          /*
-          Swal.fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!'
-           }).then((result) => {
-                if (result.value) {
-                    Swal.fire(
-                      'Deleted!',
-                      'Your file has been deleted.',
-                      'success'
-                    )
-                }
-           });
-           */
-
-
-          this.jugadorService.saveJugador(jugador)
-            .subscribe(data => {
-                this.router.navigate(["/home"]);
-            });
-
+              if(this.jugador.id != null){
+                  this.jugadorService.updateJugador(this.jugador)
+                  .subscribe(data => {
+                      this.router.navigate(["/home"]);
+                  });
+              }
+              else{
+                  
+              }
+          }
       }
+  }
+
+  public onFileChange(event) {
+      let reader = new FileReader();
+      this.fileImagen = event.target.files[0];
+  }
+
+  private inicializarForm(){
+      this.jugadorForm = new FormGroup({
+          'nombre': new FormControl(this.jugador.nombre, [
+                                        Validators.required
+                                    ]),
+          'habilidadEspecial': new FormControl(this.jugador.habilidadEspecial, [Validators.maxLength(20)]),
+          'file' : new FormControl()
+      });
+  }
+
+  get fileImagen():File{
+      return this._fileImagen;
+  }
+
+  set fileImagen(fileImagen:File){
+      this._fileImagen = fileImagen;
   }
 
   get jugadorForm():FormGroup{
@@ -78,6 +94,14 @@ export class JugadorFormComponent implements OnInit {
 
   set jugadorForm(jugadorForm:FormGroup){
       this._jugadorForm = jugadorForm;
+  }
+
+  get jugador():Jugador{
+      return this._jugador;
+  }
+
+  set jugador(jugador:Jugador){
+      this._jugador = jugador;
   }
 
 }
