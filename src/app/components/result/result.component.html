@@ -1,29 +1,51 @@
-<div class = "container">
-    <div class = "row">
-        <div class = "col">
-            <h1 class = "text-center">Futbolin <small>v1.0.0</small></h1>
-            <h2 class = "text-center">Comienza el partido!</h2>
-            <a class = "btn btn-danger" [routerLink] = "['/home']"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+<div class = "animated fadeIn fast">
+    <div class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+            <h1 class="display-4">Empieza el partido!</h1>
         </div>
     </div>
-</div>
 
-<div class = "row" id = "row-result">
-    <img src = "assets/img/versus.png" id = "img-versus" class = "animated fadeInUp slow"/>
-    <div class = "blue-half col-md-6 animated fadeInLeftBig">
+    <div class = "container mt-5">
+        <div class = "row">
+            <div class = "col-md-6">
+                <h3 class = "text-center bg-primary text-light equipo-title">Equipo Azul</h3>
+                <div class = "row">
+                    <div class = "col" *ngFor="let jugador of equipoAzul">
+                        <app-jugador-partido [jugador] = "jugador" [orientacion] = "'fadeInLeft'"></app-jugador-partido>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-md-6">
+                <h3 class = "text-center bg-danger text-light equipo-title">Equipo Rojo</h3>
+                <div class = "row">
+                    <div class = "col" *ngFor="let jugador of equipoRojo">
+                        <app-jugador-partido [jugador] = "jugador" [orientacion] = "'fadeInRight'"></app-jugador-partido>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class = "red-half col-md-6 animated fadeInRightBig">
-    </div>
-</div>
 
-<div class = "container">
-    <div class = "row">
-        <div class = "col">
-            <h3>Tiempo: {{ tiempo }} segundos</h3>
-            <h3>Ganador: </h3>
-            <button type = "button" class = "btn btn-primary">Equipo azul</button>
-            <button type = "button" class = "btn btn-danger">Equipo rojo</button>
-            <button type = "button" class = "btn btn-success">Confirmar</button>
+    <div class = "container mt-5">
+        <hr>
+        <div class = "row">
+            <div class = "col-md-4 offset-md-4">
+                <button
+                    *ngIf="partido == null"
+                    type="button" name="button" class = "btn btn-success btn-block" (click) = "generarPartido()">
+                    Empezar <i class="fa fa-check-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class = "col-md-6 offset-md-3 text-center" *ngIf="partido != null">
+                <h4><i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i> Tiempo de juego : {{ tiempoDeJuego }}</h4>
+            </div>
+            <div class = "col-md-4 offset-md-4 mt-5">
+                <button
+                    *ngIf="partido != null"
+                    type="button" name="button" class = "btn btn-danger btn-block" (click) = "finalizarPartido()">
+                    Finalizar <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>

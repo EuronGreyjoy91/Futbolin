@@ -1,0 +1,78 @@
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1 class="display-4">Estad&iacute;sticas</h1>
+    </div>
+</div>
+<div class = "container mb-3 mt-3">
+    <span class="d-block p-2 bg-primary text-white text-center">
+        <strong>Generales</strong>
+    </span>
+    <div class = "row mt-3">
+        <div class = "col-xs-12 col-md-12">
+            <h4 class = "text-center">
+                <strong>Total de partidos jugados: </strong>
+                <br>{{ partidos.length }}
+            </h4>
+            <h4 class = "text-center">
+                <strong>Tiempo promedio de juego: </strong>
+                <br>{{ tiempoPromedioDeJuego }} min.
+            </h4>
+        </div>
+    </div>
+    <span class="d-block p-2 bg-danger text-white text-center mt-3">
+        <strong>Ranking de jugadores</strong>
+    </span>
+    <div class = "row">
+        <div class = "col">
+            <table class="table text-center">
+                <thead class = "thead-dark">
+                    <tr>
+                        <th scope="col">Pos.</th>
+                        <th scope="col">Jugador</th>
+                        <th scope="col">Efectividad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let jugador of jugadores; let i = index">
+                        <td>
+                            {{ i + 1 }}
+                        </td>
+                        <td>
+                            <span>
+                                <span class="badge badge-warning" *ngIf="i == 0"><i class="fa fa-trophy" aria-hidden="true"></i></span>&nbsp;{{ jugador.nombre }}
+                            </span>
+                        </td>
+                        <td>{{ jugador.efectividad | percent}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <span class="d-block p-2 bg-success text-white text-center mt-3">
+        <strong>Extras</strong>
+    </span>
+    <div class = "row mt-3 mb-3">
+        <div class = "col-xs-12 col-md-6">
+            <h4 class = "text-center"><strong>Partidos ganados por color</strong></h4>
+            <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class = "col-xs-12 col-md-6">
+            <h4 class = "text-center"><strong>Partidos ganados / perdidos por jugador</strong></h4>
+            <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+            </canvas>
+        </div>
+    </div>
+</div>

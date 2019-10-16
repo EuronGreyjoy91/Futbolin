@@ -1,4 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
 body{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Muli', sans-serif;
+}
+
+h1, h2{
+    font-family: 'Permanent Marker', cursive;
+}
+
+.jumbotron{
+    padding: 10px;
 }

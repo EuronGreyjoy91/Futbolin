@@ -1,0 +1,14 @@
+.jumbotron{
+    padding: 10px;
+}
+
+.img-head{
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: inline-block;
+}

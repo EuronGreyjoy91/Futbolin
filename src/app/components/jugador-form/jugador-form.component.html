@@ -1,35 +1,55 @@
-<div class = "container mt-5">
-    <h4>Nuevo jugador</h4>
+<div class = "container mt-5 animated fadeIn fast">
+    <h2 *ngIf="jugador.id == null; else falseTemplate">Nuevo jugador</h2>
+    <ng-template #falseTemplate>
+        <h2>Editar jugador</h2>
+    </ng-template>
     <hr>
-    <form [formGroup] = "jugadorForm" (ngSubmit) = "guardarJugador()">
-        <div class="form-group row">
-            <label class="col-2 col-form-label">Nombre</label>
-            <div class="col-md-8">
-                <input class="form-control"
-                type="text"
-                placeholder="Nombre"
-                formControlName="nombre">
-            </div>
+    <div class = "row">
+        <div class = "col-md-9">
+            <form [formGroup] = "jugadorForm" (ngSubmit) = "guardarJugador()" #ngForm="ngForm">
+                <div class="form-group row has-danger">
+                    <label class="col-2 col-form-label">Nombre</label>
+                    <div class="col-md-10">
+                        <input class="form-control"
+                        type="text"
+                        placeholder="Nombre"
+                        formControlName="nombre"
+                        [ngClass]="{'is-valid': jugadorForm.controls.nombre.valid && ngForm.submitted,
+                                    'is-invalid' : (jugadorForm.controls.nombre.errors?.required || jugadorForm.controls.nombre.errors?.maxlength) && ngForm.submitted}">
+                        <div class="valid-feedback">Perfecto</div>
+                        <div class="invalid-feedback">Por favor, carg&aacute; un nombre que no sobrepase 20 car&aacute;cteres</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Habilidad especial</label>
+                    <div class="col-md-10">
+                        <input class="form-control"
+                        type="text"
+                        placeholder="Habilidad especial (opcional)"
+                        formControlName="habilidadEspecial"
+                        [ngClass]="{'is-valid': jugadorForm.controls.habilidadEspecial.valid && ngForm.submitted, 'is-invalid' : jugadorForm.controls.habilidadEspecial.errors?.maxlength && ngForm.submitted}">
+                        <div class="valid-feedback">Perfecto</div>
+                        <div class="invalid-feedback">M&aacute;ximo 20 car&aacute;cteres</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="file">Avatar</label>
+                    <div class = "col-md-10">
+                        <input type="file" class="form-control" id="customFile" formControlName="file" (change)="onFileChange($event)" accept="image/*">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">&nbsp;</label>
+                    <div class="input-group col-md-8">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group row">
-            <label class="col-2 col-form-label">Habilidad especial</label>
-            <div class="col-md-8">
-                <input class="form-control"
-                type="text"
-                placeholder="Habilidad especial"
-                formControlName="habilidadEspecial">
-            </div>
+        <div class = "col-md-3" *ngIf="jugador.id != null">
+            <img [src]="jugador.pathImagen | noAvatar" [alt]="jugador.nombre" class="img-thumbnail">
         </div>
-
-        <div class="form-group row">
-            <label class="col-2 col-form-label">&nbsp;</label>
-            <div class="input-group col-md-8">
-                <button type="submit" class="btn btn-outline-primary">
-                    Guardar
-                </button>
-            </div>
-        </div>
-
-    </form>
+    </div>
 </div>

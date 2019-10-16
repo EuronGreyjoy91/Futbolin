@@ -1,12 +1,19 @@
 export class Jugador{
-    private nombre:string;
-    private ganados:number;
-    private perdidos:number;
-    private goles:number;
-    private habilidadEspecial:string;
-    private activo:boolean;
+    id:number;
+    nombre:string;
+    ganados:number;
+    perdidos:number;
+    habilidadEspecial:string;
+    activo:boolean;
+    pathImagen:string;
 
-    constructor(obj:any){
-        Object.assign(this, obj);
+    constructor() {
+        this.id = null;
+        this.nombre = "";
+        this.ganados = 0;
+        this.perdidos = 0;
+        this.habilidadEspecial = "";
+        this.activo = true;
+        this.pathImagen = null;
     }
 }

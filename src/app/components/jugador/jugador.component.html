@@ -2,33 +2,45 @@
     [ngClass]="index % 4 == 0 ? 'fourth-delay' : index % 3 == 0 ? 'third-delay' : index % 2 == 0 ? 'second-delay' : 'first-delay'">
 
     <div class = "panel-head" >
-        <a href = "#" [routerLink] = "['/jugador', jugador.id]" class = "btn btn-primary btn-editar rounded-circle">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+        <button
+            tooltip="Borrar jugador" placement="top"
+            (click) = "borrarJugador(jugador)"
+            class = "btn btn-danger rounded-circle btn-borrar">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+        </button>
+        <a href = "#" [routerLink] = "['/jugador', jugador.id]"
+            tooltip="Editar jugador" placement="top"
+            class = "btn btn-primary btn-editar rounded-circle">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
         </a>
-        <div class = "img-head" [ngStyle]="{'background-image': 'url(assets/img/no-user.png)'}">
+        <div class = "img-head" [ngStyle]="{'background-image': 'url('+(jugador.pathImagen | noAvatar)+')'}">
         </div>
     </div>
 
     <div class = "panel-data">
-
         <div class = "panel-text text-center">
             <h3>{{ jugador.nombre }}</h3>
-            <i>"{{ jugador.habilidadEspecial }}"</i>
+            <i *ngIf="jugador.habilidadEspecial != null && jugador.habilidadEspecial != ''; else falseTemplate">"{{ jugador.habilidadEspecial }}"</i>
+            <ng-template #falseTemplate>
+                <i>&nbsp;</i>
+            </ng-template>
             <hr>
             <p><b>Ganados:</b> {{ jugador.ganados }}</p>
             <p><b>Perdidos:</b> {{ jugador.perdidos }}</p>
         </div>
 
         <div class = "panel-estadisticas">
-            <button type = "button" class = "btn btn-primary btn-block btn-estadisticas">
-                <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                Estadisticas
-            </button>
-            <button type = "button" class = "btn btn-success btn-block btn-seleccionar">
+            <button *ngIf="!seleccionado"
+                type = "button" class = "btn btn-success btn-block btn-seleccionar" (click) = "seleccionarJugador(jugador)">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 Seleccionar
             </button>
+
+            <button *ngIf="seleccionado"
+                type = "button" class = "btn btn-danger btn-block btn-seleccionar" (click) = "quitarJugador(jugador)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                Quitar
+            </button>
         </div>
     </div>
-
 </div>

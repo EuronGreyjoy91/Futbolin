@@ -1,0 +1,16 @@
+.img-head{
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin: auto;
+    position: relative;
+}
+
+.player-selected{
+    position: relative;
+    top: 20%;
+}

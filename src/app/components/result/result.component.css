@@ -1,17 +1,9 @@
-#img-versus{
-    position: absolute;
-    height: 100px;
-    z-index: 1;
-    top: 35%;
-    left: 47%;
-}
-
-#row-result{
-    position:relative;
+.equipo-title{
+    padding: 10px;
 }
 
 .blue-half, .red-half{
-    height: 300px;
+    height: 320px;
 }
 
 .blue-half{
@@ -20,4 +12,9 @@
 
 .red-half{
     background-color: red;
+}
+
+.jumbotron{
+    padding: 10px;
+    margin-bottom: 0px;
 }

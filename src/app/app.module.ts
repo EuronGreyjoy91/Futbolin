@@ -12,13 +12,27 @@ import { JugadorComponent } from './components/jugador/jugador.component';
 import { ResultComponent } from './components/result/result.component';
 import { JugadorFormComponent } from './components/jugador-form/jugador-form.component';
 
+//EXTRAS
+import { TooltipModule } from 'ng2-tooltip-directive';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NoAvatarPipe } from './pipes/no-avatar.pipe';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
+
+//GRAFICOS
+import { ChartsModule } from 'ng2-charts';
+import { JugadorPartidoComponent } from './components/jugador-partido/jugador-partido.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     JugadorComponent,
     ResultComponent,
-    JugadorFormComponent
+    JugadorFormComponent,
+    NavbarComponent,
+    NoAvatarPipe,
+    EstadisticasComponent,
+    JugadorPartidoComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +40,8 @@ import { JugadorFormComponent } from './components/jugador-form/jugador-form.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientJsonpModule,
+    TooltipModule,
+    ChartsModule,
     APP_ROUTING
   ],
   providers: [],

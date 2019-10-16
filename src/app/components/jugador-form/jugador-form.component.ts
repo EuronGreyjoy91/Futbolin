@@ -19,9 +19,7 @@ export class JugadorFormComponent implements OnInit {
   constructor(private jugadorService:JugadorService,
             private activadtedRouter:ActivatedRoute,
             private router:Router) {
-
                 this.jugador = new Jugador();
-
   }
 
   ngOnInit() {
@@ -35,45 +33,62 @@ export class JugadorFormComponent implements OnInit {
                     this.inicializarForm();
                 })
           }
-      })
+      });
   }
 
-  guardarJugador(){
+  public guardarJugador(){
       if(this.jugadorForm.valid){
+          Swal.fire({
+              title: 'Confirmarción',
+              text: '¿Confirmar guardado?',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: 'green',
+              cancelButtonColor: 'red',
+              confirmButtonText: 'Si',
+              cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.value) {
+                    this.jugador.nombre = this.jugadorForm.controls.nombre.value;
+                    this.jugador.habilidadEspecial = this.jugadorForm.controls.habilidadEspecial.value;
 
-          if(this.fileImagen != undefined && this.fileImagen != null && this.fileImagen.size > 1000000){
-              Swal.fire({
-                  type: 'error',
-                  title: 'Oops...',
-                  text: `La imagen no debe superar 1MB`
-              });
-          }
-          else{
-              this.jugador.nombre = this.jugadorForm.controls.nombre.value;
-              this.jugador.habilidadEspecial = this.jugadorForm.controls.habilidadEspecial.value;
-
-              if(this.jugador.id != null){
-                  this.jugadorService.updateJugador(this.jugador)
-                  .subscribe(data => {
-                      this.router.navigate(["/home"]);
-                  });
-              }
-              else{
-                  
-              }
-          }
+                    if(this.fileImagen != undefined && this.fileImagen != null && this.fileImagen.size > 1000000){
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: `La imagen no debe superar 1MB`
+                        });
+                    }
+                    else if(this.fileImagen != undefined && this.fileImagen != null && this.fileImagen.size < 1000000){
+                        this.jugadorService.uploadFile(this.fileImagen)
+                        .subscribe(data => {
+                            this.jugador.pathImagen = data;
+                            this.saveJugador(this.jugador);
+                        });
+                    }
+                    else
+                        this.saveJugador(this.jugador);
+                }
+          });
       }
   }
 
+  public saveJugador(jugador:Jugador){
+      this.jugadorService.saveJugador(jugador)
+      .subscribe(data => {
+          this.router.navigate(["/home"]);
+      });
+  }
+
   public onFileChange(event) {
-      let reader = new FileReader();
       this.fileImagen = event.target.files[0];
   }
 
   private inicializarForm(){
       this.jugadorForm = new FormGroup({
           'nombre': new FormControl(this.jugador.nombre, [
-                                        Validators.required
+                                        Validators.required,
+                                        Validators.maxLength(20)
                                     ]),
           'habilidadEspecial': new FormControl(this.jugador.habilidadEspecial, [Validators.maxLength(20)]),
           'file' : new FormControl()

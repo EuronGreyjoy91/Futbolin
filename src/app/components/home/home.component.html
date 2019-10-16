@@ -1,18 +1,23 @@
-<div class = "container">
-    <div class = "row">
-        <div class = "col">
-            <h1 class = "text-center">Futbolin <small>v1.0.0</small></h1>
-        </div>
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1 class="display-4">Jugadores</h1>
     </div>
 </div>
-<hr>
-<div class = "container mb-3">
+<div class = "container mb-3 mt-5">
     <div class = "row">
         <div class = "col">
-            <h2 class = "text-center mb-3">Jugadores</h2>
-            <button type = "button" class = "btn btn-primary" [routerLink] = "['/jugador']"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Nuevo jugador</button>
-            <button type = "button" class = "btn btn-primary"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp;Estadisticas</button>
-            <a class = "btn btn-danger" [routerLink] = "['/result']"><i class="fa fa-wheelchair-alt" aria-hidden="true"></i>&nbsp;Resultado</a>
+            <button type = "button"
+                tooltip="Nuevo jugador" placement="top"
+                class = "btn btn-primary rounded-pill btn-lg"
+                [routerLink] = "['/jugador']">
+                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Nuevo</button>
+
+            <button type = "button"
+                tooltip="Comenzar partido" placement="top"
+                class = "btn btn-danger rounded-pill pull-right btn-lg"
+                (click) = "jugarPartido()">
+                <i class="fa fa-futbol-o" aria-hidden="true"></i>&nbsp;Jugar!</button>
+
         </div>
     </div>
     <div class = "row">
