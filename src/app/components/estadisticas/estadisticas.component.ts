@@ -61,7 +61,7 @@ export class EstadisticasComponent implements OnInit {
   ngOnInit() {
       this.partidoService.obtenerPartidos()
       .subscribe((data) => {
-          console.log(data);
+          //console.log(data);
 
           //PROMEDIO DE JUEGO
           this.partidos = data['content'];
@@ -98,7 +98,7 @@ export class EstadisticasComponent implements OnInit {
 
           //JUGADORES
           jugadores.forEach(function(jugador){
-              let puntos = (jugador.ganados * 2) + (jugador.perdidos + 1);
+              let puntos = (jugador.ganados * 2) + (jugador.perdidos);
               jugador.puntos = puntos;
               jugador.efectividad = jugador.ganados / (jugador.ganados + jugador.perdidos);
 
@@ -114,7 +114,10 @@ export class EstadisticasComponent implements OnInit {
           this.barChartData.push(perdidos);
 
           this.jugadores = Array.from(jugadores.values());
-          console.log(this.jugadores);
+
+          this.jugadores.sort(function(a, b){
+              return (b['puntos'] - a['puntos']) + (b['efectividad'] - a['efectividad']);
+          });
       });
   }
 

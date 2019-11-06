@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
 export class JugadorService {
 
   private _jugadoresSeleccionados:Jugador[];
-  private _urlService:string = "http://localhost:8080/api/v1";
+  //private _urlService:string = "http://localhost:8080/api/v1";
+  private _urlService:string = "https://futbolinbackend.herokuapp.com/api/v1";
 
   public MAX_JUGADORES:number = 4;
   public MIN_JUGADORES:number = 2;

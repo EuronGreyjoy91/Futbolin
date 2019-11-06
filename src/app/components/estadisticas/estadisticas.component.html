@@ -29,6 +29,7 @@
                     <tr>
                         <th scope="col">Pos.</th>
                         <th scope="col">Jugador</th>
+                        <th scope="col">Puntos</th>
                         <th scope="col">Efectividad</th>
                     </tr>
                 </thead>
@@ -42,6 +43,7 @@
                                 <span class="badge badge-warning" *ngIf="i == 0"><i class="fa fa-trophy" aria-hidden="true"></i></span>&nbsp;{{ jugador.nombre }}
                             </span>
                         </td>
+                        <td>{{ jugador.puntos }}</td>
                         <td>{{ jugador.efectividad | percent}}</td>
                     </tr>
                 </tbody>
