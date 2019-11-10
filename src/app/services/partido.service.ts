@@ -15,12 +15,12 @@ export class PartidoService {
   private _urlService:string = "https://futbolinbackend.herokuapp.com/api/v1";
 
   public guardarPartido(partido:Partido): Observable<any>{
-      let url = `${this.urlService}`;
+      let url = `${this.urlService}/partidos`;
       return this.httpClient.post(url, partido);
   }
 
   public obtenerPartidos(){
-      let url = `${this.urlService}`;
+      let url = `${this.urlService}/partidos`;
       return this.httpClient.get<Partido[]>(url);
   }
 
